@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inkwell — All Posts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="index.html">Ink<span>well</span></a>
+    <nav>
+      <a class="nav-link active" href="index.html">All Posts</a>
+      <a class="nav-link" href="create_post.html">Write</a>
+      <a class="btn btn-primary" href="create_post.html">+ New Post</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Stories worth <em>reading,</em><br>words worth keeping.</h1>
+    <p>A simple, distraction-free space to share your thoughts with the world.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="create_post.html">Start Writing</a>
+      <a class="btn btn-outline" href="#feed">Browse Posts ↓</a>
+    </div>
+  </section>
+
+  <div class="container" id="feed">
+
+    <div class="section-header">
+      <span class="section-title">Latest Stories</span>
+      <!-- Django: {{ posts|length }} post{{ posts|length|pluralize }} -->
+      <span class="posts-count">3 posts</span>
+    </div>
+
+    <!--
+      ═══════════════════════════════════════════════════════════════════
+      DJANGO TEMPLATE USAGE:
+
+      {% if posts %}
+
+        FEATURED (first post):
+        {% with post=posts.0 %}
+          <a class="post-featured" href="{% url 'post-detail' post.id %}">
+            ...
+          </a>
+        {% endwith %}
+
+        GRID (remaining posts):
+        <div class="posts-grid">
+          {% for post in posts|slice:"1:" %}
+            <a class="post-card" href="{% url 'post-detail' post.id %}">
+              ...
+            </a>
+          {% endfor %}
+        </div>
+
+      {% else %}
+        ... empty state ...
+      {% endif %}
+      ═══════════════════════════════════════════════════════════════════
+    -->
+
+    <!-- FEATURED POST (first post) -->
+    <a class="post-featured" href="post_detail.html">
+      <div class="post-featured-image">
+        <!--
+          Django:
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy"/>
+          {% else %}
+            <div class="img-placeholder">✦</div>
+          {% endif %}
+        -->
+        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80" alt="Sample post cover" loading="lazy"/>
+      </div>
+      <div class="post-featured-body">
+        <div class="post-tag">Featured</div>
+        <!-- Django: <h2 class="post-title">{{ post.title }}</h2> -->
+        <h2 class="post-title">The Art of Writing Simply and Clearly</h2>
+        <!-- Django: <p class="post-excerpt">{{ post.body|truncatechars:200 }}</p> -->
+        <p class="post-excerpt">Good writing is like a windowpane. The best prose gets out of the way of the ideas it carries, letting meaning shine through without distraction or unnecessary ornamentation...</p>
+        <div class="post-meta">
+          <!-- Django: <span>{{ post.created_at|date:"F j, Y" }}</span> -->
+          <span>February 27, 2026</span>
+          <span class="read-more">Read →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- POSTS GRID (remaining posts) -->
+    <div class="posts-grid">
+
+      <!-- Django: {% for post in posts|slice:"1:" %} -->
+
+      <a class="post-card" href="post_detail.html">
+        <div class="post-card-image">
+          <img src="https://images.unsplash.com/photo-1542435503-ec7b0f5a1b42?w=600&q=80" alt="Post cover" loading="lazy"/>
+        </div>
+        <div class="post-card-body">
+          <div class="post-tag">Post</div>
+          <h3 class="post-title">Why Django REST Framework is Amazing</h3>
+          <p class="post-excerpt">DRF gives you serializers, viewsets, and authentication out of the box...</p>
+          <div class="post-meta">
+            <span>February 20, 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="post_detail.html">
+        <div class="post-card-image">
+          <!-- Example with NO image — show placeholder -->
+          <div class="img-placeholder">✦</div>
+        </div>
+        <div class="post-card-body">
+          <div class="post-tag">Post</div>
+          <h3 class="post-title">Getting Started with Python in 2026</h3>
+          <p class="post-excerpt">Python remains one of the most beginner-friendly languages in the world...</p>
+          <div class="post-meta">
+            <span>February 14, 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Django: {% endfor %} -->
+
+    </div>
+
+    <!-- EMPTY STATE — show when no posts exist -->
+    <!--
+    <div class="empty-state">
+      <div class="empty-icon">✍</div>
+      <h3>Nothing here yet</h3>
+      <p>Be the first to share a story.</p>
+      <a class="btn btn-primary" href="create_post.html">Write the first post</a>
+    </div>
+    -->
+
+  </div>
+
+  <footer>
+    <span class="footer-logo">Inkwell</span>
+    <span>Built with Django REST Framework</span>
+  </footer>
+
+</body>
+</html>
