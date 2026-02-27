@@ -14,8 +14,8 @@
     <a class="logo" href="index.html">Ink<span>well</span></a>
     <nav>
       <a class="nav-link active" href="index.html">All Posts</a>
-      <a class="nav-link" href="create_post.html">Write</a>
-      <a class="btn btn-primary" href="create_post.html">+ New Post</a>
+      <a class="nav-link" href="{% url 'addPost' %}">Write</a>
+      <a class="btn btn-primary" href="{% url 'addPost' %}">+ New Post</a>
     </nav>
   </header>
 
@@ -24,7 +24,7 @@
     <h1>Stories worth <em>reading,</em><br>words worth keeping.</h1>
     <p>A simple, distraction-free space to share your thoughts with the world.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="create_post.html">Start Writing</a>
+      <a class="btn btn-primary" href="{% url 'addPost' %}">Start Writing</a>
       <a class="btn btn-outline" href="#feed">Browse Posts ↓</a>
     </div>
   </section>
