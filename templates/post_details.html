@@ -1,134 +1,190 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Django: <title>{{ post.title }} — Inkwell</title> -->
-  <title>The Art of Writing Simply — Inkwell</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
 
-  </style>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Art of Writing Simply — Inkwell</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+
 </head>
+
+
 <body>
 
-  <header>
-    <a class="logo" href="index.html">Ink<span>well</span></a>
-    <nav>
-      <a class="nav-link" href="index.html">All Posts</a>
-      <a class="nav-link" href="create_post.html">Write</a>
-      <a class="btn btn-primary" href="create_post.html">+ New Post</a>
-    </nav>
-  </header>
+    <header>
+        <a class="logo" href="{% url 'home' %}">Ink<span>well</span></a>
+        <nav>
+            <a class="nav-link" href="{% url 'home' %}">All Posts</a>
+            <a class="nav-link" href="{% url 'addPost' %}">Write</a>
+            <a class="btn btn-primary" href="{% url 'addPost' %}">+ New Post</a>
+        </nav>
+    </header>
 
-  <div class="back-bar">
-    <a class="back-link" href="index.html">← All Posts</a>
-  </div>
-
-  <div class="container">
-    <article>
-
-      <div class="article-header">
-        <span class="post-tag">Post</span>
-
-        <h1 class="article-title">The Art of Writing Simply and Clearly</h1>
-
-        <div class="article-meta">
-          <span>February 27, 2026</span>
-
-          <span class="meta-divider"></span>
-
-          <span>10:30 AM</span>
-
-          <span class="meta-divider"></span>
-
-          <form class="delete-form" method="POST" action="#">
-            <button class="delete-btn" type="submit"
-              onclick="return confirm('Are you sure you want to delete this post?')">
-              Delete post
-            </button>
-          </form>
-        </div>
-      </div>
-      <img
-        class="article-cover"
-        src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80"
-        alt="Post cover"
-        loading="lazy"
-      />
-
-      <div class="article-body">
-        <p>Good writing is like a windowpane. The best prose gets out of the way of the ideas it carries, letting meaning shine through without distraction or unnecessary ornamentation. This is harder than it sounds.</p>
-        <p>Most writers, when they start out, feel the urge to demonstrate their intelligence through complexity — long sentences, obscure vocabulary, elaborate structures. But the reader does not care how hard you worked. The reader cares only about the experience of reading, and a difficult experience is rarely a rewarding one.</p>
-        <p>The goal is clarity. Clarity of thought, clarity of structure, clarity of language. When you find yourself reaching for a complicated word, ask whether a simpler one would do. It almost always will.</p>
-        <p>Writing simply is not the same as writing badly. A clear sentence can carry enormous weight. A plain word can resonate for years. What we are after is not the absence of style but the presence of precision — saying exactly what you mean, no more, no less.</p>
-        <p>Start with the idea. Before you write a single word, know what you are trying to say. Not roughly, not approximately — exactly. If you cannot state your point in one clear sentence, you do not yet understand it well enough to write about it.</p>
-      </div>
-
-      <div class="article-end">
-        <span class="article-end-label">— End of post</span>
-        <a class="back-link" href="index.html"
-          style="text-transform:uppercase;font-size:0.78rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:0.06em;">
-          ← Back to all posts
-        </a>
-      </div>
-
-    </article>
-    <div class="comments-section">
-
-      <div class="comments-heading">
-        <h2>Comments</h2>
-        <span class="comments-count">2 comments</span>
-      </div>
-      <div class="comment-form-wrapper">
-        <form method="POST" action="#">
-
-          <label class="comment-form-label" for="body">Leave a comment</label>
-          <textarea
-            class="comment-textarea"
-            id="body"
-            name="body"
-            placeholder="Share your thoughts on this post…"
-            required
-          ></textarea>
-          <div class="comment-form-actions">
-            <button class="btn-comment" type="submit">Post Comment →</button>
-          </div>
-        </form>
-      </div>
-      <div class="comments-list">
-
-        <div class="comment-item">
-          <div class="comment-meta">
-            <div class="comment-avatar">✦</div>
-            <div>
-              <div class="comment-author">Anonymous</div>
-              <div class="comment-date">February 28, 2026 · 9:14 AM</div>
-            </div>
-          </div>
-          <p class="comment-body">This really resonated with me. I've been trying to simplify my own writing for months and this framing of prose as a windowpane is exactly the mental model I needed.</p>
-        </div>
-
-        <div class="comment-item">
-          <div class="comment-meta">
-            <div class="comment-avatar">✦</div>
-            <div>
-              <div class="comment-author">Anonymous</div>
-              <div class="comment-date">February 28, 2026 · 11:42 AM</div>
-            </div>
-          </div>
-          <p class="comment-body">Great post. Short, clear, no fluff — which is a bit ironic given the topic, but in the best possible way.</p>
-        </div>
-
-      </div>
+    <div class="back-bar">
+        <a class="back-link" href="{% url 'home' %}">← All Posts</a>
     </div>
 
-  </div>
+    <div class="container">
+        <article>
 
-  <footer>
-    <span class="footer-logo">Inkwell</span>
-    <span>Built with Django REST Framework</span>
-  </footer>
+            <div class="article-header">
+                <span class="post-tag">Post</span>
+
+                <h1 class="article-title">{{blog.blog_title}}</h1>
+
+                <div class="article-meta">
+                    <span>February 27, 2026</span>
+
+                    <span class="meta-divider"></span>
+
+                    <span>10:30 AM</span>
+
+                    <span class="meta-divider"></span>
+
+                    <form id="deleteForm">
+                        <button class="delete-btn" type="submit">
+                            Delete post
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% if blog.images %}
+            <img class="article-cover" src="{{ blog.images.url}}" alt="Post cover" loading="lazy" />
+            {% endif %}
+
+            <div class="article-body">
+                <p>{{blog.blog_body}}</p>
+            </div>
+
+            <div class="article-end">
+                <span class="article-end-label">— End of post</span>
+                <a class="back-link" href="{% url 'home' %}"
+                    style="text-transform:uppercase;font-size:0.78rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:0.06em;">
+                    ← Back to all posts
+                </a>
+            </div>
+
+        </article>
+
+
+        <div class="comments-section">
+
+            <div class="comments-heading">
+                <h2>Comments</h2>
+                <span class="comments-count">2 comments</span>
+            </div>
+            <div class="comment-form-wrapper">
+                <form id="commentForm">
+                    {% csrf_token %}
+                    <label class="comment-form-label" for="body">Leave a comment</label>
+                    <textarea class="comment-textarea" id="body" name="comments"
+                        placeholder="Share your thoughts on this post…" required></textarea>
+                    <div class="comment-form-actions">
+                        <button class="btn-comment" type="submit">Post Comment →</button>
+                    </div>
+                </form>
+            </div>
+
+
+            {% if comments %}
+            {% for comment in comments %}
+            <div class="comments-list">
+
+                <div class="comment-item">
+                    <div class="comment-meta">
+                        <div class="comment-avatar">✦</div>
+                    </div>
+                    <p class="comment-body">{{comment.comments}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div>
+                <p class="comment-body">No Comment for this blog.</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <footer>
+        <span class="footer-logo">Inkwell</span>
+        <span>Built with Django REST Framework</span>
+    </footer>
+    <script>
+        const blogId = "{{ blog.id }}";
+    </script>
+    <script>
+        const deleteForm = document.getElementById("deleteForm");
+
+        deleteForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            if (!confirm("Are you sure you want to delete this post?")) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/3.1/blog/${blogId}/`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+
+                if (response.ok) {
+                    window.location.href = "/";
+                } else {
+                    alert("Failed to delete post.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Server error while deleting.");
+            }
+        });
+    </script>
+    <script>
+        const commentForm = document.getElementById("commentForm");
+
+        commentForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const bodyValue = document.getElementById("body").value;
+
+            try {
+                const response = await fetch("/api/3.1/comments/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: JSON.stringify({
+                        comments: bodyValue,
+                        blog: parseInt(blogId)
+                    })
+                });
+
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    const errorData = await response.json();
+                    console.log(errorData);
+                    alert("Failed to post comment.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Server error while posting comment.");
+            }
+        });
+    </script>
 
 </body>
+
 </html>

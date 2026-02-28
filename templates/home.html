@@ -41,7 +41,7 @@
         </div>
 
         {% for blog in blogs %}
-        <a class="post-featured" href="post_detail.html">
+        <a class="post-featured" href="{% url 'postDetail' blog.id %}">
             {% if blog.images %}
             <div class="post-featured-image">
                 <img src="{{blog.images.url}}" alt="Sample post cover" loading="lazy" />
