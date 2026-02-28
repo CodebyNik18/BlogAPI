@@ -13,7 +13,7 @@ class Blog(models.Model):
     
     
 class Comment(models.Model):
-    blog = models.ForeignKey(to=Blog, on_delete=models.CASCADE)
+    blog = models.ForeignKey(to=Blog, on_delete=models.CASCADE, related_name='comments')
     comments = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

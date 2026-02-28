@@ -1,107 +1,129 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Write a Post — Inkwell</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="{% static 'css/add_post.css' %}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Write a Post — Inkwell</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/add_post.css' %}">
 </head>
+
 <body>
 
-  <header>
-    <a class="logo" href="index.html">Ink<span>well</span></a>
-    <nav>
-      <a class="nav-link" href="index.html">All Posts</a>
-      <a class="nav-link active" href="create_post.html">Write</a>
-      <a class="btn btn-primary" href="create_post.html">+ New Post</a>
-    </nav>
-  </header>
+    <header>
+        <a class="logo" href="index.html">Ink<span>well</span></a>
+        <nav>
+            <a class="nav-link" href="index.html">All Posts</a>
+            <a class="nav-link active" href="create_post.html">Write</a>
+            <a class="btn btn-primary" href="create_post.html">+ New Post</a>
+        </nav>
+    </header>
 
-  <div class="container">
+    <div class="container">
 
-    <div class="page-header">
-      <h1>Write <em>something.</em></h1>
-      <p>Share your story with the world — your words, your voice, your ideas.</p>
-    </div>
-
-    <div class="form-section">
-
-      <form method="POST" action="#" enctype="multipart/form-data">
-        <!-- Django: add {% csrf_token %} here -->
-
-        <!-- TITLE -->
-        <div class="form-group">
-          <label for="title">Title <span class="req">*</span></label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Give your story a title…"
-            required
-            maxlength="255"
-            autocomplete="off"
-          />
+        <div class="page-header">
+            <h1>Write <em>something.</em></h1>
+            <p>Share your story with the world — your words, your voice, your ideas.</p>
         </div>
 
-        <!-- BODY -->
-        <div class="form-group">
-          <label for="body">Body <span class="req">*</span></label>
-          <span class="field-hint">Write your full post content here.</span>
-          <textarea
-            id="body"
-            name="body"
-            placeholder="Start writing your story here…"
-            required
-          ></textarea>
-        </div>
+        <div class="form-section">
 
-        <hr class="form-divider"/>
+            <form id="blogForm" enctype="multipart/form-data">
+                <!-- Django: add {% csrf_token %} here -->
 
-        <!-- IMAGE UPLOAD -->
-        <div class="form-group">
-          <label for="image">Cover Image <span style="text-transform:none;font-size:0.75rem;letter-spacing:0;color:var(--muted);font-weight:300;">(optional)</span></label>
-          <span class="field-hint">Recommended size: 1200 × 630px or larger.</span>
+                <!-- TITLE -->
+                <div class="form-group">
+                    <label for="title">Title <span class="req">*</span></label>
+                    <input type="text" id="title" name="blog_title" placeholder="Give your story a title…" required
+                        maxlength="255" autocomplete="off" />
+                </div>
 
-          <div class="file-upload-box">
-            <!--
+                <!-- BODY -->
+                <div class="form-group">
+                    <label for="body">Body <span class="req">*</span></label>
+                    <span class="field-hint">Write your full post content here.</span>
+                    <textarea id="body" name="blog_body" placeholder="Start writing your story here…" required></textarea>
+                </div>
+
+                <hr class="form-divider" />
+
+                <!-- IMAGE UPLOAD -->
+                <div class="form-group">
+                    <label for="image">Cover Image <span
+                            style="text-transform:none;font-size:0.75rem;letter-spacing:0;color:var(--muted);font-weight:300;">(optional)</span></label>
+                    <span class="field-hint">Recommended size: 1200 × 630px or larger.</span>
+
+                    <div class="file-upload-box">
+                        <!--
               name="image" must match your DRF serializer's ImageField name.
               Your DRF serializer should have:
                 image = serializers.ImageField(required=False, allow_null=True)
             -->
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/png, image/jpeg, image/webp, image/gif"
-            />
-            <span class="upload-icon">🖼</span>
-            <div class="upload-label">
-              <strong>Click to upload</strong> a cover image
-            </div>
-            <div class="upload-formats">PNG · JPG · WEBP · GIF</div>
-          </div>
+                        <input type="file" id="image" name="images"
+                            accept="image/png, image/jpeg, image/webp, image/gif" />
+                        <span class="upload-icon">🖼</span>
+                        <div class="upload-label">
+                            <strong>Click to upload</strong> a cover image
+                        </div>
+                        <div class="upload-formats">PNG · JPG · WEBP · GIF</div>
+                    </div>
+                </div>
+
+                <hr class="form-divider" />
+
+                <!-- ACTIONS -->
+                <div class="form-actions">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-submit">Publish Post →</button>
+                    <a class="btn-cancel" href="index.html">Cancel</a>
+                    <span class="required-note"><span class="req">*</span> Required fields</span>
+                </div>
+
+            </form>
         </div>
-
-        <hr class="form-divider"/>
-
-        <!-- ACTIONS -->
-        <div class="form-actions">
-            {% csrf_token %}
-          <button type="submit" class="btn btn-submit">Publish Post →</button>
-          <a class="btn-cancel" href="index.html">Cancel</a>
-          <span class="required-note"><span class="req">*</span> Required fields</span>
-        </div>
-
-      </form>
     </div>
-  </div>
 
-  <footer>
-    <span class="footer-logo">Inkwell</span>
-    <span>Built with Django REST Framework</span>
-  </footer>
+    <footer>
+        <span class="footer-logo">Inkwell</span>
+        <span>Built with Django REST Framework</span>
+    </footer>
 
+    <script>
+        const form = document.getElementById("blogForm");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault(); // Stop normal form submission
+
+            const formData = new FormData(form); // Collect form data (including image)
+
+            try {
+                const response = await fetch("/api/3.1/blog/", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    window.location.href = "/";
+                } else {
+                    const errorData = await response.json();
+                    console.log(errorData);
+                    alert("Something went wrong. Check console.");
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Server error.");
+            }
+        });
+    </script>
+    <!-- redirecting to another page -->
 </body>
+
 </html>
